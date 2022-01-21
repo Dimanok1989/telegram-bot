@@ -1,0 +1,19 @@
+{
+    "name": "kolgaev/telegram-bot",
+    "description": "Telegram API bot for Laravel",
+    "license": "MIT",
+    "autoload": {
+        "psr-4": {
+            "Kolgaev\\TelegramBot\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "Dimanok1989",
+            "email": "kolgaev@gmail.com"
+        }
+    ],
+    "require": {
+        "guzzlehttp/guzzle": "^7.4"
+    }
+}
