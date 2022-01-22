@@ -21,9 +21,8 @@ namespace Kolgaev\TelegramBot\Objects;
  * @property bool $supports_inline_queries  Optional. True, if the bot supports inline queries.
  *                                          Returned only in getMe.
  * 
- * @see https://core.telegram.org/bots/api#user
+ * @link https://core.telegram.org/bots/api#user
  */
 class User extends BaseObject
 {
-
 }

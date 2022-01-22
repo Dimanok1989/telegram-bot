@@ -16,6 +16,6 @@ trait GetMe
      */
     public function getMe()
     {
-        return $this->client()->post("getMe")->objects('result', User::class);
+        return $this->client()->post("getMe")->object(User::class);
     }
 }

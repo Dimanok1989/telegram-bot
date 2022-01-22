@@ -64,6 +64,17 @@ class Response
     }
 
     /**
+     * Sets object data
+     * 
+     * @param string $object
+     * @return $this
+     */
+    public function object($object)
+    {
+        return $this;
+    }
+
+    /**
      * Gets the response status code
      * 
      * @return int
@@ -111,17 +122,6 @@ class Response
     public function json()
     {
         return new JsonResponse($this->body, $this->getStatusCode());
-    }
-
-    /**
-     * Sets objects data
-     * 
-     * @param array $data
-     * @return $this
-     */
-    public function objects(...$data)
-    {
-        return $this;
     }
 
     /**
