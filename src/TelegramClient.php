@@ -2,6 +2,7 @@
 
 namespace Kolgaev\TelegramBot;
 
+use Exception;
 use GuzzleHttp\Client;
 
 class TelegramClient
@@ -41,7 +42,11 @@ class TelegramClient
      */
     public function sendRequest($method, $uri, $data)
     {
-        $response = $this->client->request($method, $uri, $data);
+        try {
+            $response = $this->client->request($method, $uri, $data);
+        } catch (Exception $e) {
+            $response = $e->getResponse();
+        }
 
         return new Response($response);
     }

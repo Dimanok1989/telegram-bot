@@ -4,7 +4,8 @@ namespace Kolgaev\TelegramBot\Api;
 
 trait Methods
 {
-    use GetMe,
+    use ForwardMessage,
+        GetMe,
         GetWebhookInfo,
         SendMessage;
 }
