@@ -14,6 +14,13 @@ class TelegramClient
     protected $client;
 
     /**
+     * Response server
+     * 
+     * @var array
+     */
+    protected $response;
+
+    /**
      * Initialisation client object
      * 
      * @param array $config
@@ -30,16 +37,13 @@ class TelegramClient
      * @param string $method
      * @param string $uri
      * @param array $data
-     * @return array
+     * @return \Kolgaev\TelegramBot\Response
      */
     public function sendRequest($method, $uri, $data)
     {
         $response = $this->client->request($method, $uri, $data);
 
-        $body = $response->getBody()->getContents();
-        $content = json_decode($body, true);
-
-        return $content ?: [$body];
+        return new Response($response);
     }
 
     /**
@@ -47,7 +51,7 @@ class TelegramClient
      * 
      * @param string $uri
      * @param array $data
-     * @return array
+     * @return \Kolgaev\TelegramBot\Response
      */
     public function post($uri = "", $data = [])
     {
@@ -61,7 +65,7 @@ class TelegramClient
      * 
      * @param string $uri
      * @param array $data
-     * @return array
+     * @return \Kolgaev\TelegramBot\Response
      */
     public function get($uri = "", $data = [])
     {

@@ -9,7 +9,7 @@ use Kolgaev\TelegramBot\Exceptions\TelegramBotException;
  */
 class Api
 {
-    use Api\Webhook;
+    use Api\Methods;
 
     public const APP_NAME = "Kolgaev Telegram Bot (kBot)";
     public const APP_VERSION = "0.1.0";

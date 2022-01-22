@@ -10,6 +10,8 @@ trait GetWebhookInfo
      * with the url field empty.
      * 
      * @see https://core.telegram.org/bots/api#getwebhookinfo
+     * 
+     * @return \Kolgaev\TelegramBot\Response
      */
     public function getWebhookInfo()
     {

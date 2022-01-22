@@ -2,7 +2,7 @@
 
 namespace Kolgaev\TelegramBot\Api;
 
-trait Webhook
+trait Methods
 {
     use Webhook\GetWebhookInfo;
 }
