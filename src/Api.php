@@ -76,4 +76,33 @@ class Api
     {
         return $this->token;
     }
+
+    /**
+     * Handle dynamic method calls into the method.
+     *
+     * @param string $method
+     * @param array $parameters
+     * @return mixed
+     * 
+     * @throws Kolgaev\TelegramBot\Exceptions\TelegramBotException
+     */
+    public function __call($name, $arguments)
+    {
+        if (!method_exists($this, $name))
+            throw new TelegramBotException("Method [$name] not exist");
+
+        return null;
+    }
+
+    /**
+     * Handle dynamic method calls into the method.
+     *
+     * @param string $method
+     * @param array $parameters
+     * @return mixed
+     */
+    static function __callStatic($name, $arguments)
+    {
+        return (new static)->$name(...$arguments);
+    }
 }

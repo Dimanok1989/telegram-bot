@@ -4,6 +4,7 @@ namespace Kolgaev\TelegramBot;
 
 use GuzzleHttp\Psr7\Response as GuzzleResponse;
 use Kolgaev\TelegramBot\Exceptions\ResponseException;
+use Symfony\Component\HttpFoundation\JsonResponse;
 
 class Response
 {
@@ -103,6 +104,16 @@ class Response
     }
 
     /**
+     * Json response
+     * 
+     * @return \Symfony\Component\HttpFoundation\JsonResponse
+     */
+    public function json()
+    {
+        return new JsonResponse($this->body, $this->getStatusCode());
+    }
+
+    /**
      * Dynamic output of data by key from an array with a result
      * 
      * @param string $name
@@ -120,8 +131,8 @@ class Response
     /**
      * Handle dynamic method calls into the method.
      *
-     * @param  string  $method
-     * @param  array   $parameters
+     * @param string $method
+     * @param array $parameters
      * @return mixed
      */
     public function __call($name, $arguments)
