@@ -114,6 +114,17 @@ class Response
     }
 
     /**
+     * Sets objects data
+     * 
+     * @param array $data
+     * @return $this
+     */
+    public function objects(...$data)
+    {
+        return $this;
+    }
+
+    /**
      * Dynamic output of data by key from an array with a result
      * 
      * @param string $name

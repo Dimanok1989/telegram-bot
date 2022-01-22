@@ -1,6 +1,6 @@
 <?php
 
-namespace Kolgaev\TelegramBot\Api\Webhook;
+namespace Kolgaev\TelegramBot\Api;
 
 trait GetWebhookInfo
 {

@@ -4,5 +4,6 @@ namespace Kolgaev\TelegramBot\Api;
 
 trait Methods
 {
-    use Webhook\GetWebhookInfo;
+    use GetMe,
+        GetWebhookInfo;
 }
