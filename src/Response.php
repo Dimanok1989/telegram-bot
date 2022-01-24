@@ -4,7 +4,7 @@ namespace Kolgaev\TelegramBot;
 
 use GuzzleHttp\Psr7\Response as GuzzleResponse;
 use Kolgaev\TelegramBot\Exceptions\ResponseException;
-use Symfony\Component\HttpFoundation\JsonResponse;
+use Kolgaev\TelegramBot\Response\ResponseJson;
 
 class Response
 {
@@ -117,11 +117,11 @@ class Response
     /**
      * Json response
      * 
-     * @return \Symfony\Component\HttpFoundation\JsonResponse
+     * @return \Kolgaev\TelegramBot\Response\ResponseJson
      */
     public function json()
     {
-        return new JsonResponse($this->body, $this->getStatusCode());
+        return new ResponseJson($this->body, $this->getStatusCode());
     }
 
     /**
