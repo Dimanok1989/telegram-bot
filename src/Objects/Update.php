@@ -11,20 +11,12 @@ namespace Kolgaev\TelegramBot\Objects;
 class Update extends BaseObject
 {
     /**
-     * Attributes list classes types
+     * Attributes list types
      * 
      * @var array
      */
-    protected $required_list = [
-        'update_id',
-    ];
-
-    /**
-     * Attributes list classes types
-     * 
-     * @var array
-     */
-    protected $options_list = [
+    protected $props_types = [
+        'update_id' => "integer",
         'message' => Message::class,
         'edited_message' => Message::class,
         'channel_post' => Message::class,
