@@ -3,6 +3,7 @@
 namespace Kolgaev\TelegramBot\Objects;
 
 use Illuminate\Support\Collection;
+use Kolgaev\TelegramBot\Exceptions\TelegramBotException;
 
 class BaseObject extends Collection
 {
@@ -14,6 +15,13 @@ class BaseObject extends Collection
     protected $props_types = [];
 
     /**
+     * Input data
+     * 
+     * @var array
+     */
+    protected $data;
+
+    /**
      * Instantiating an Object
      * 
      * @param array
@@ -21,9 +29,9 @@ class BaseObject extends Collection
      */
     public function __construct($data = [])
     {
-        $data = $this->setPropsTypes($data);
+        $this->data = $this->setPropsTypes($data);
 
-        parent::__construct($data);
+        parent::__construct($this->data);
     }
 
     /**
@@ -103,5 +111,57 @@ class BaseObject extends Collection
             return $var;
 
         return settype($var, $type);
+    }
+
+    /**
+     * Dynamically access collection proxies.
+     * 
+     * @param string $name
+     * @return mixed
+     */
+    public function __get($name)
+    {
+        if (!empty($this->data[$name]))
+            return $this->data[$name];
+
+        return null;
+    }
+
+    /**
+     * Dynamically handle calls to the class.
+     * 
+     * @param string $method
+     * @param array $parameters
+     * @return mixed
+     * 
+     * @throws \Kolgaev\TelegramBot\Exceptions\TelegramBotException
+     */
+    public function __call($method, $parameters)
+    {
+        if (strpos($method, "get") === 0) {
+            return $this->getDynamicallyItemKeyName(str_replace("get", "", $method));
+        }
+
+        throw new TelegramBotException("Bad call [$method] method");
+    }
+
+    /**
+     * Dimanic output of the input data property
+     * 
+     * @param string $name
+     * @return mixed
+     */
+    public function getDynamicallyItemKeyName($name)
+    {
+        $key = "";
+
+        foreach (str_split(lcfirst($name)) as $char) {
+            $key .= ctype_upper($char) ? "_" . lcfirst($char) : $char;
+        }
+
+        if (!empty($this->data[$key]))
+            return $this->data[$key];
+
+        return null;
     }
 }
