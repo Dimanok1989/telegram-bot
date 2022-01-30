@@ -6,6 +6,7 @@ trait Methods
 {
     use ForwardMessage,
         GetMe,
+        GetMyCommands,
         GetWebhookInfo,
         SendMessage;
 }

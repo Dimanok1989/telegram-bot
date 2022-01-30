@@ -36,9 +36,19 @@ class BaseObject extends Collection
         $this->classes = $list;
     }
 
-    public function toArray()
+    /**
+     * Returns array data
+     * 
+     * @return array
+     */
+    public function getData()
     {
-        $this;
+        foreach ($this->items as &$item) {
+            if (is_object($item) and method_exists($item, "getData"))
+                $item = $item->getData();
+        }
+
+        return $this->all();
     }
 
     /**
