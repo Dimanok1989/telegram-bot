@@ -2,6 +2,7 @@
 
 namespace Kolgaev\TelegramBot;
 
+use Closure;
 use Kolgaev\TelegramBot\Objects\Update;
 
 class Commands
@@ -85,6 +86,67 @@ class Commands
     public function on($name, $handler)
     {
         $this->commands[$name] = $handler;
+
+        return $this;
+    }
+
+    /**
+     * Run commands execution
+     * 
+     * @return $this 
+     */
+    public function start()
+    {
+        foreach ($this->found as $cmd) {
+
+            if (isset($this->commands[$cmd])) {
+                $this->run($this->commands[$cmd]);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * Run command
+     * 
+     * @param  mixed  $cmd
+     * @return $this
+     */
+    public function run($cmd)
+    {
+        if (is_string($cmd))
+            return $this->runFromString($cmd);
+
+        if ($cmd instanceof Closure)
+            $cmd($this);
+
+        return $this;
+    }
+
+    /**
+     * Run command
+     * 
+     * @param  string  $cmd
+     * @return $this
+     */
+    public function runFromString($cmd)
+    {
+        $cmd = explode("@", trim($cmd));
+
+        $class = $cmd[0] ?? "";
+        $method = $cmd[1] ?? null;
+
+        if (class_exists($class)) {
+
+            $object = new $cmd[0];
+
+            if (method_exists($object, $method)) {
+                $object->$method($this);
+            } else if (method_exists($object, "__invoke")) {
+                $object($this);
+            }
+        }
 
         return $this;
     }

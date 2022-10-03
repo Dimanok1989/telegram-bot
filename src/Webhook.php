@@ -47,6 +47,6 @@ class Webhook extends Commands
     {
         $callback($this);
 
-        return $this;
+        return $this->start();
     }
 }
