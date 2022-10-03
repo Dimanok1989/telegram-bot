@@ -34,7 +34,7 @@ class Chat extends BaseObject
         'sticker_set_name' => "string",
         'can_set_sticker_set' => "boolean",
         'linked_chat_id' => "integer",
-        // 'location' => ChatLocation::class,
+        'location' => ChatLocation::class,
     ];
 
     /**
