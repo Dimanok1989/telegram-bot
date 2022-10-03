@@ -2,6 +2,7 @@
 
 namespace Kolgaev\TelegramBot;
 
+use Closure;
 use Kolgaev\TelegramBot\Objects\Update;
 
 class Webhook extends Commands
@@ -23,16 +24,29 @@ class Webhook extends Commands
     /**
      * Instantiating an Object
      * 
-     * @param array $input
-     * @param null|string $token
+     * @param  array  $input
+     * @param  null|string  $token
      * @return void
      */
     public function __construct($input = [], $token = null)
     {
         $this->input = new Update($input);
 
-        $this->telegram = new Telegram($token);
-
         parent::__construct($this->input);
+
+        $this->telegram = new Telegram($token);
+    }
+
+    /**
+     * Command registration method
+     * 
+     * @param  \Closure  $callback
+     * @return $this
+     */
+    public function register(Closure $callback)
+    {
+        $callback($this);
+
+        return $this;
     }
 }

@@ -7,6 +7,13 @@ use Kolgaev\TelegramBot\Objects\Update;
 class Commands
 {
     /**
+     * Commands list
+     * 
+     * @var array
+     */
+    protected $commands = [];
+
+    /**
      * Found commands
      * 
      * @var array
@@ -16,7 +23,7 @@ class Commands
     /**
      * Instantiating an Object
      * 
-     * @param  \Kolgaev\TelegramBot\Objects\Update $update
+     * @param  \Kolgaev\TelegramBot\Objects\Update  $update
      * @return void
      */
     public function __construct(Update $update)
@@ -27,7 +34,7 @@ class Commands
     /**
      * Finds a commands
      * 
-     * @param  \Kolgaev\TelegramBot\Objects\Update $update
+     * @param  \Kolgaev\TelegramBot\Objects\Update  $update
      * @return $this
      */
     public function findCommands(Update $update)
@@ -42,7 +49,7 @@ class Commands
     /**
      * Parses incoming message commands
      * 
-     * @param  array $entities
+     * @param  array  $entities
      * @return $this
      */
     public function parseMessageEntitiesCommand($entities = [])
@@ -59,12 +66,26 @@ class Commands
     /**
      * Parses text message command
      * 
-     * @param  int $offset
-     * @param  int $length
+     * @param  int  $offset
+     * @param  int  $length
      * @return string
      */
     public function parseMessageTextCommand($offset, $length)
     {
         return trim(mb_substr($this->message->getText(), $offset + 1, $length) ?: "");
+    }
+
+    /**
+     * Регистрация комманды
+     * 
+     * @param  string  $name
+     * @param  mixed  $handler
+     * @return $this
+     */
+    public function on($name, $handler)
+    {
+        $this->commands[$name] = $handler;
+
+        return $this;
     }
 }
