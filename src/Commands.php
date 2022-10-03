@@ -16,7 +16,7 @@ class Commands
     /**
      * Instantiating an Object
      * 
-     * @param \Kolgaev\TelegramBot\Objects\Update $update
+     * @param  \Kolgaev\TelegramBot\Objects\Update $update
      * @return void
      */
     public function __construct(Update $update)
@@ -27,7 +27,7 @@ class Commands
     /**
      * Finds a commands
      * 
-     * @param \Kolgaev\TelegramBot\Objects\Update $update
+     * @param  \Kolgaev\TelegramBot\Objects\Update $update
      * @return $this
      */
     public function findCommands(Update $update)
@@ -42,14 +42,14 @@ class Commands
     /**
      * Parses incoming message commands
      * 
-     * @param array
+     * @param  array $entities
      * @return $this
      */
     public function parseMessageEntitiesCommand($entities = [])
     {
         foreach ($entities as $row) {
             if ($row['type'] == "bot_command") {
-                $this->found[] = $this->parseMessageTextCommand($row['offset'], $row['length']);
+                $this->found[] = $this->parseMessageTextCommand($row['offset'] ?? 0, $row['length'] ?? 0);
             }
         }
 
@@ -59,12 +59,12 @@ class Commands
     /**
      * Parses text message command
      * 
-     * @param int $offset
-     * @param int $length
+     * @param  int $offset
+     * @param  int $length
      * @return string
      */
     public function parseMessageTextCommand($offset, $length)
     {
-        return mb_substr($this->message->getText(), $offset + 1, $length) ?: "";
+        return trim(mb_substr($this->message->getText(), $offset + 1, $length) ?: "");
     }
 }
