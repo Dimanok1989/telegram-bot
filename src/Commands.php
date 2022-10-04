@@ -127,12 +127,13 @@ class Commands
     /**
      * Run command
      * 
-     * @param  string  $cmd
+     * @param  array|string  $cmd
      * @return $this
      */
     public function runFromString($cmd)
     {
-        $cmd = explode("@", trim($cmd));
+        if (!is_array($cmd))
+            $cmd = explode("@", trim($cmd));
 
         $class = $cmd[0] ?? "";
         $method = $cmd[1] ?? null;
