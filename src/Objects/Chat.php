@@ -21,20 +21,20 @@ class Chat extends BaseObject
         'username' => "string",
         'first_name' => "string",
         'last_name' => "string",
-        // 'photo' => ChatPhoto::class,
+        'photo' => ChatPhoto::class,
         'bio' => "string",
         'has_private_forwards' => "boolean",
         'description' => "string",
         'invite_link' => "string",
         'pinned_message' => Message::class,
-        // 'permissions' => ChatPermissions::class,
+        'permissions' => ChatPermissions::class,
         'slow_mode_delay' => "integer",
         'message_auto_delete_time' => "integer",
         'has_protected_content' => "boolean",
         'sticker_set_name' => "string",
         'can_set_sticker_set' => "boolean",
         'linked_chat_id' => "integer",
-        // 'location' => ChatLocation::class,
+        'location' => ChatLocation::class,
     ];
 
     /**
